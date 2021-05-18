@@ -1,0 +1,86 @@
+/*CSS for index Page*/
+
+#first_head {
+    text-align: center;
+    color: red;
+    text-decoration: underline;
+}
+
+body {
+    background-color: white;
+    color: red;
+}
+
+h1 {
+    color: black;
+    text-decoration: underline;
+}
+
+.account_header {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#head_txt {
+    display: inline-block;
+    margin: auto;
+    text-align: right;
+}
+
+#head_logo {
+    display: inline-block;
+    margin: auto;
+    width: 35%;
+}
+
+#head_logo img {
+    margin-left: auto;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: block;
+    height: 150px;
+}
+
+.content_list:link {
+    color: red;
+    text-decoration: none;
+}
+
+.content_list:visited {
+    color: red;
+    text-decoration: none;
+}
+
+.content_list:hover {
+    color: blue;
+    text-decoration: none;
+}
+
+.content_list:active {
+    background-color: black;
+    color: red;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: 'digital-clock-font';
+    src: url('../font/digital-7.ttf');
+}
+
+#time {
+    text-align: left;
+    font-size: 30px;
+    font-family: 'digital-clock-font';
+    color: red;
+    text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #e60073, 0 0 10px #e60073, 0 0 10px #e60073, 0 0 10px #e60073, 0 0 10px #e60073;
+}
+
+header,
+section,
+footer,
+aside,
+nav,
+article,
+figure {
+    display: block;
+}
