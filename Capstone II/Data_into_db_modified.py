@@ -4,7 +4,7 @@ import pymysql
 import sys
 import csv
 
-path = '/home/ramtin/Desktop/Capstone1/test_files/testmod.csv'
+path = '/home/ramtin/Desktop/Capstone1/Capstone/test_files/testmod.csv'
 
 
 mydb = pymysql.connect(host=sys.argv[1], #for test, "localhost"
