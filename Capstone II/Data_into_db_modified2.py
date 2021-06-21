@@ -3,6 +3,8 @@
 import pymysql
 import sys
 import csv
+from datetime import datetime
+
 
 path = '/home/ramtin/Desktop/Capstone1/Capstone/test_files/testmod2.csv'
 
@@ -13,23 +15,25 @@ mydb = pymysql.connect(host=sys.argv[1], #for test, "localhost"
                            db=sys.argv[3]) #for test, "test"
 cursor = mydb.cursor()
 csv_data = csv.reader(open(path))
+timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 for row in csv_data:
-      magnet_xaxis = mydb.escape_string(row[0]) #var1
-      magnet_yaxis = mydb.escape_string(row[1])  #var2
-      magnet_zaxis = mydb.escape_string(row[2])  #var3
-      accel_x = mydb.escape_string(row[3])  #var4
-      accel_y = mydb.escape_string(row[4])  #var5
-      accel_z = mydb.escape_string(row[5])  #var6
-      humidity = mydb.escape_string(row[6])  #var7
-      temp = mydb.escape_string(row[7])      #var8
-      baropress = mydb.escape_string(row[8])  #var9
+      nodeID = mydb.escape_string(row[0])       #var1
+      magnet_xaxis = mydb.escape_string(row[1]) #var2
+      magnet_yaxis = mydb.escape_string(row[2])  #var3
+      magnet_zaxis = mydb.escape_string(row[3])  #var4
+      accel_x = mydb.escape_string(row[4])  #var5
+      accel_y = mydb.escape_string(row[5])  #var6
+      accel_z = mydb.escape_string(row[6])  #var7
+      humidity = mydb.escape_string(row[7])  #var8
+      temp = mydb.escape_string(row[8])      #var9
+      baropress = mydb.escape_string(row[9])  #var10
       
-      cursor.execute('INSERT INTO acceleration(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}");'.format(accel_x,accel_y,accel_z))
-      cursor.execute('INSERT INTO magnetometer(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}");'.format(magnet_xaxis,magnet_yaxis,magnet_zaxis))
-      cursor.execute('INSERT INTO baropress(hectopa) VALUES ("{}");'.format(baropress))
-      cursor.execute('INSERT INTO temperature(degcelc) VALUES ("{}");'.format(temp))
-      cursor.execute('INSERT INTO humidity(relativeperc) VALUES ("{}");'.format(humidity))
+      cursor.execute('INSERT INTO acceleration(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}");'.format(nodeID,accel_x,accel_y,accel_z))
+      cursor.execute('INSERT INTO magnetometer(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}");'.format(nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+      cursor.execute('INSERT INTO baropress(hectopa) VALUES ("{}","{}");'.format(nodeID,baropress))
+      cursor.execute('INSERT INTO temperature(degcelc) VALUES ("{}","{}");'.format(nodeID,temp))
+      cursor.execute('INSERT INTO humidity(relativeperc) VALUES ("{}","{}");'.format(nodeID,humidity))
 
 mydb.commit()
 cursor.close()
