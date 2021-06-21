@@ -16,17 +16,6 @@ csv_data = csv.reader(open(path))
 
 
 for row in csv_data:
-      
-      # magnet_xaxis = mydb.escape_string(row[0]) #var2
-      # magnet_yaxis = mydb.escape_string(row[1])  #var3
-      # magnet_zaxis = mydb.escape_string(row[2])  #var4
-      # accel_x = mydb.escape_string(row[3])  #var5
-      # accel_y = mydb.escape_string(row[4])  #var6
-      # accel_z = mydb.escape_string(row[5])  #var7
-      # humidity = mydb.escape_string(row[6])  #var8
-      # temp = mydb.escape_string(row[7])      #var9
-      # baropress = mydb.escape_string(row[8])  #var10
-
       nodeID = mydb.escape_string(row[0])       #var1
       magnet_xaxis = mydb.escape_string(row[1]) #var2
       magnet_yaxis = mydb.escape_string(row[2])  #var3
@@ -38,11 +27,6 @@ for row in csv_data:
       temp = mydb.escape_string(row[8])      #var9
       baropress = mydb.escape_string(row[9])  #var10
 
-      # cursor.execute('INSERT INTO acceleration(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}");'.format(accel_x,accel_y,accel_z))
-      # cursor.execute('INSERT INTO magnetometer(xaxis,yaxis,zaxis) VALUES ("{}","{}","{}");'.format(magnet_xaxis,magnet_yaxis,magnet_zaxis))
-      # cursor.execute('INSERT INTO baropress(hectopa) VALUES ("{}");'.format(baropress))
-      # cursor.execute('INSERT INTO temperature(degcelc) VALUES ("{}");'.format(temp))
-      # cursor.execute('INSERT INTO humidity(relativeperc) VALUES ("{}");'.format(humidity))
       
       cursor.execute('INSERT INTO acceleration(NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}");'.format(nodeID,accel_x,accel_y,accel_z))
       cursor.execute('INSERT INTO magnetometer(NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}");'.format(nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
