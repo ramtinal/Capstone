@@ -45,20 +45,42 @@ for files in Files_to_Process:
             baropress = mydb.escape_string(row[11])    #air pressure 
 
             
-            cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
-            cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
-            cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
-            
-            if (magnet_xaxis == "x" and magnet_yaxis == "x"):
+            if ((magnet_xaxis == "x" and magnet_yaxis == "x") and magnet_zaxis == "x"):
                   cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
                   cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
-            elif (accel_x == "x" and accel_y == "x"):
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
+            elif ((accel_x == "x" and accel_y == "x") and accel_z == "x"):
                   cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID))
                   cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
+            elif (humidity == "x"):
+                  cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
+                  cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+            elif (temp == "x"):
+                  cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
+                  cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
+            elif (baropress == "x"):
+                  cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
+                  cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
             else:
                   cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
                   cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
-                  
+                  cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+                  cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+                  cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
 
 mydb.commit()
 cursor.close()
