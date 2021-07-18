@@ -6,7 +6,6 @@ import csv
 import shutil
 import os
 
-path2 = '/home/capstone/project/data_inbox/testmod3.csv'
 path_inbox = '/home/capstone/project/data_inbox'
 path_working = '/home/capstone/project/data_working/data'
 path_archive = '/home/capstone/project/data_archive'
@@ -25,7 +24,6 @@ mydb = pymysql.connect(host=sys.argv[1], #for actual database, "localhost"
                            #passwd='123456',
                            db=sys.argv[3]) #for actual database, "WEMS_Data"
 cursor = mydb.cursor()
-# csv_data = csv.reader(open(path2))
 for files in Files_to_Process:
       file_path_working = f"{path_working}/{files}"
       csv_data = csv.reader(open(file_path_working))
