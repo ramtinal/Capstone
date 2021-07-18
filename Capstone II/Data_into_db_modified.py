@@ -28,21 +28,30 @@ for row in csv_data:
       temp = mydb.escape_string(row[10])         #temperature in C
       baropress = mydb.escape_string(row[11])    #air pressure 
 
+      # cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+      # cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
+      # cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
       
-      cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
-      cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
-      cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
-      
-      if (magnet_xaxis == "x" and magnet_yaxis == "x"):
-            cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
-            cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
-      elif (accel_x == "x" and accel_y == "x"):
-            cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID))
+      if ((magnet_xaxis == "x" and magnet_yaxis == "x") and magnet_zaxis == "x"):
+            cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID))
+      else: 
             cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+      if ((accel_x == "x" and accel_y == "x") and accel_z == "x"):
+            cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID))
       else:
             cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
-            cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
-            
+      if (humidity == "x"):
+            cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+      else:
+            cursor.execute('INSERT INTO humidity(Timestamp,GatewayID,NodeID,relativeperc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,humidity))
+      if (baropress == "x"):
+            cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+      else: 
+            cursor.execute('INSERT INTO baropress(Timestamp,GatewayID,NodeID,hectopa) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,baropress))
+      if (temp == "x"):
+            cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}",NULL);'.format(date,gatewayID,nodeID))
+      else: 
+            cursor.execute('INSERT INTO temperature(Timestamp,GatewayID,NodeID,degcelc) VALUES ("{}","{}","{}","{}");'.format(date,gatewayID,nodeID,temp))
 
 mydb.commit()
 cursor.close()
@@ -51,3 +60,13 @@ cursor.close()
 
 ##Old code, might need later:
 #cursor.execute('INSERT INTO {table} ({var1},{var2},{var3}) VALUES ("{}","{}","{}","{}","{}","{}","{}","{}","{}");'.format(magnet_xaxis,magnet_yaxis,magnet_zaxis, accel_x, accel_y, accel_z, humidity, temp, baropress))
+
+#       if (magnet_xaxis == "x" and magnet_yaxis == "x"):
+#             cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+#             cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
+#       elif (accel_x == "x" and accel_y == "x"):
+#             cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}",NULL,NULL,NULL);'.format(date,gatewayID,nodeID))
+#             cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
+#       else:
+#             cursor.execute('INSERT INTO acceleration(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,accel_x,accel_y,accel_z))
+#             cursor.execute('INSERT INTO magnetometer(Timestamp,GatewayID,NodeID,xaxis,yaxis,zaxis) VALUES ("{}","{}","{}","{}","{}","{}");'.format(date,gatewayID,nodeID,magnet_xaxis,magnet_yaxis,magnet_zaxis))
