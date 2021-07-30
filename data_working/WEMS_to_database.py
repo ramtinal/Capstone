@@ -19,10 +19,10 @@ for files in os.listdir(path_inbox):
             shutil.copy(file_path_inbox,file_path_working)
             Files_to_Process.append(files)
 
-mydb = pymysql.connect(host=sys.argv[1], #for actual database, "localhost"
-                           user=sys.argv[2], #for actual database, "root"
-                           #passwd='123456',
-                           db=sys.argv[3]) #for actual database, "WEMS_Data"
+mydb = pymysql.connect(host=sys.argv[1], #for actual database, "184.144.62.45"
+                           user=sys.argv[2], #for actual database, "google"
+                           passwd=sys.argv[3], #for actual database, "T3mppass"
+                           db=sys.argv[4]) #for actual database, "WEMS_Data"
 cursor = mydb.cursor()
 for files in Files_to_Process:
       file_path_working = f"{path_working}/{files}"
