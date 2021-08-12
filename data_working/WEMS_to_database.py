@@ -21,8 +21,9 @@ for files in os.listdir(path_inbox):
 
 mydb = pymysql.connect(host=sys.argv[1], #for actual database, "184.144.62.45"
                            user=sys.argv[2], #for actual database, "google"
-                           passwd=sys.argv[3], #for actual database, "T3mppass"
-                           db=sys.argv[4]) #for actual database, "WEMS_Data"
+                        #    passwd=sys.argv[3], #for actual database, "T3mppass"
+                           db=sys.argv[3]) #for actual database, "WEMS_Data"
+                        #    port=3306) ##for actual database, "3306"
 cursor = mydb.cursor()
 for files in Files_to_Process:
       file_path_working = f"{path_working}/{files}"
